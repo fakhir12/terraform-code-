@@ -13,6 +13,15 @@ resource "aws_lb_target_group" "target_group" {
     port     = var.alb_listener_port
     protocol = var.target_group_protocol
     vpc_id   = var.vpc_id
+   health_check {
+    path                = var.health_check_path
+    protocol            = var.health_check_protocol
+    healthy_threshold   = var.health_check_healthy_threshold
+    unhealthy_threshold = var.health_check_unhealthy_threshold
+    timeout             = var.health_check_timeout
+    interval            = var.health_check_interval
+    matcher             = var.health_check_matcher
+  }
 }
 
 

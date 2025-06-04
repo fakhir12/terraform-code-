@@ -10,7 +10,7 @@ resource "aws_security_group" "wordpress_sg" {
        for_each = var.ingress_ports
        iterator = port
        content {
-        description = var.ingress_description
+        description = var.alb_ingress_protocol
         from_port = port.value
         to_port = port.value
         protocol = var.ingress_protocol
@@ -47,7 +47,7 @@ resource "aws_security_group" "db_sg" {
         description = var.ingress_description
         from_port = port.value
         to_port = port.value
-        protocol = var.ingress_protocol
+        protocol = var.alb_ingress_protocol
         security_groups = [aws_security_group.wordpress_sg.id]
        
          
@@ -60,7 +60,7 @@ resource "aws_security_group" "db_sg" {
         description = var.egress_description
         from_port = port.value
         to_port = port.value
-        protocol = var.egress_protocol
+        protocol = var.alb_egress_protocol
         security_groups = [aws_security_group.wordpress_sg.id]
         
         
@@ -73,31 +73,35 @@ resource "aws_security_group" "db_sg" {
 
 
 
-# resource "aws_security_group" "alb_sg" {
-#     vpc_id = var.vpc_id
-#     dynamic "ingress" {
-#        for_each = [80]
-#        iterator = port
-#        content {
-#         description = var.ingress_description
-#         from_port = port.value
-#         to_port = port.value
-#         protocol = var.ingress_protocol
-#         cidr_blocks = var.cidr_blocks
+resource "aws_security_group" "alb_sg" {
+    vpc_id = var.vpc_id
+    dynamic "ingress" {
+       for_each = [80]
+       iterator = port
+       content {
+        description = var.ingress_description
+        from_port = port.value
+        to_port = port.value
+        protocol = var.alb_ingress_protocol
+        cidr_blocks = var.cidr_blocks
          
-#        } 
-#     }
-#     dynamic "egress" {
-#         for_each = [0]
-#         iterator = port
-#         content {
-#         description = var.egress_description
-#         from_port = port.value
-#         to_port = port.value
-#         protocol = var.alb_egress_protocol
-#         cidr_blocks = var.cidr_blocks
+       } 
+    }
+    dynamic "egress" {
+        for_each = [0]
+        iterator = port
+        content {
+        description = var.egress_description
+        from_port = port.value
+        to_port = port.value
+        protocol = var.egress_protocol
+        cidr_blocks = var.cidr_blocks
+       
        
         
-#      }
-#     }
-# }
+     }
+    }
+    tags = {
+    Name = "${var.env}-alb-ecs-sg"
+  }
+}

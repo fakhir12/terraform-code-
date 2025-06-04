@@ -1,18 +1,21 @@
-variable "db_name" {
+variable "rds_db_name" {
   description = "Name of the database"
   type = string
+  sensitive   = true
   
 }
 
-variable "username" {
+variable "rds_username" {
   description = "Name of the database user"
   type = string
+  sensitive   = true
   
 }
 
-variable "db_password" {
+variable "rds_password" {
   description = "Password of the database user"
   type = string
+  sensitive   = true
   
 }
 

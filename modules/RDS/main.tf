@@ -14,9 +14,9 @@ resource "aws_db_instance" "datab_subnet_group" {
     engine               = var.engine
     engine_version       = var.engine_version  
     instance_class       = var.instance_class 
-    db_name              = var.db_name
-    username             = var.username
-    password             = var.db_password
+    db_name              = var.rds_db_name
+    username             = var.rds_username
+    password             = var.rds_password
     parameter_group_name = var.parameter_group_name
     db_subnet_group_name = aws_db_subnet_group.database_subnet_group.name
     skip_final_snapshot  = var.skip_final_snapshot
