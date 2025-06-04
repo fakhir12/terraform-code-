@@ -9,7 +9,7 @@ pipeline {
             steps {
                 git branch: 'main', 
                 url: 'https://github.com/fakhir12/terraform-code-.git',
-                credentialsId: '' // Add if private repo needs auth
+                
             }
         }
         
