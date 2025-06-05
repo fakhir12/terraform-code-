@@ -58,11 +58,11 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', 
-                    url: 'https://github.com/fakhir12/terraform-code.git'
-            }
+        steps {
+        git credentialsId: 'github-pat',
+            branch: 'main', 
+            url: 'https://github.com/fakhir12/terraform-code.git'
+    }
         }
 
         stage('Terraform Destroy') {
