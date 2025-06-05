@@ -96,3 +96,26 @@ variable "secret_password" {
   type        = string
   description = "RDS password, should be set via Secrets Manager"
 }
+
+
+
+
+variable "create_ecs_roles" {
+  type        = bool
+  description = "Set to true to create IAM ECS roles, false to use existing ones"
+  default     = true
+}
+
+
+
+variable "create_iam_resources" {
+  description = "Whether to create IAM resources or use existing ones"
+  type        = bool
+  default     = true
+}
+
+variable "secret_resources" {
+  description = "List of secret ARNs the ECS tasks can access"
+  type        = list(string)
+  default     = ["*"] # Restrict this in production!
+}

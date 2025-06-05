@@ -14,6 +14,7 @@ resource "aws_launch_template" "ecs_launch_template" {
 
   iam_instance_profile {
     name = aws_iam_instance_profile.ecs_instance_profile.name
+    # name = local.ecs_instance_profile_name
   }
 
   network_interfaces {
@@ -61,6 +62,9 @@ resource "aws_ecs_task_definition" "wordpress" {
   memory                   = var.container_memory  
  execution_role_arn = aws_iam_role.ecs_task_execution_role.arn
 task_role_arn      = aws_iam_role.ecs_task_execution_role.arn
+  # execution_role_arn = local.ecs_task_execution_role_arn
+  # task_role_arn      = local.ecs_task_execution_role_arn
+
 
 
 
