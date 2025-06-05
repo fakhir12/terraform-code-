@@ -8,8 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git credentialsId: 'github-pat',
-                    branch: 'main',
+                git branch: 'main',
                     url: 'https://github.com/fakhir12/terraform-code.git'
             }
         }
