@@ -28,29 +28,29 @@ module "vpc" {
 
 
 
-# module "security" {
-#   for_each             = { for security in var.security_groups : security.egress_protocol => security }
-#   source               = "./modules/security"
-#   env                  = each.value.env
-#   identifier           = each.value.identifier
-#   region               = each.value.region
-#   vpc_id               = module.vpc[each.value.env].vpc_id
-#   cidr_blocks          = each.value.cidr_blocks
-#   egress_protocol      = each.value.egress_protocol
-#   ingress_protocol     = each.value.ingress_protocol
-#   ingress_description  = each.value.ingress_description
-#   egress_description   = each.value.egress_description
-#   ingress_ports        = each.value.ingress_ports
-#   egress_ports         = each.value.egress_ports
-#   public_cidr_blocks   = each.value.public_cidr_blocks
-#   alb_egress_protocol  = each.value.alb_egress_protocol
-#   alb_ingress_protocol = each.value.alb_ingress_protocol
+module "security" {
+  for_each             = { for security in var.security_groups : security.egress_protocol => security }
+  source               = "./modules/security"
+  env                  = each.value.env
+  identifier           = each.value.identifier
+  region               = each.value.region
+  vpc_id               = module.vpc[each.value.env].vpc_id
+  cidr_blocks          = each.value.cidr_blocks
+  egress_protocol      = each.value.egress_protocol
+  ingress_protocol     = each.value.ingress_protocol
+  ingress_description  = each.value.ingress_description
+  egress_description   = each.value.egress_description
+  ingress_ports        = each.value.ingress_ports
+  egress_ports         = each.value.egress_ports
+  public_cidr_blocks   = each.value.public_cidr_blocks
+  alb_egress_protocol  = each.value.alb_egress_protocol
+  alb_ingress_protocol = each.value.alb_ingress_protocol
 
 
 
-#   depends_on = [module.vpc]
+  depends_on = [module.vpc]
 
-# }
+}
 
 
 
