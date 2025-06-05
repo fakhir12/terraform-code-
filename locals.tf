@@ -5,7 +5,6 @@ locals {
     rds_db_name  = var.rds_db_name
     key_name     = var.key_name
   }
-  # rds_secret_json = jsondecode(data.aws_secretsmanager_secret_version.rds_secret.secret_string)
 
 
 
